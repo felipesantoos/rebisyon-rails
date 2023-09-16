@@ -39,3 +39,13 @@ Uma plataforma para o gerenciamento de estudos e revisões feita em Ruby on Rail
 - .gitattributes - This file defines metadata for specific paths in a git repository. This metadata can be used by git and other tools to enhance their behavior.
 - .gitignore - This file tells git which files (or patterns) it should ignore.
 - .ruby-version	- This file contains the default Ruby version.
+- bin/rails server
+- In the development environment, Rails does not generally require you to restart the server; changes you make in files will be automatically picked up by the server.
+
+```ruby
+get "/articles", to "articles#index"
+```
+
+- bin/rails generate controller Articles index --skip-routes
+- When an action does not explicitly render a view (or otherwise trigger an HTTP response), Rails will automatically render a view that matches the name of the controller and action.
+- https://guides.rubyonrails.org/getting_started.html#autoloading
