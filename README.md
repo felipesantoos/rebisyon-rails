@@ -1,6 +1,6 @@
 # rebisyon-rails
 
-Uma plataforma para o gerenciamento de estudos e revisões feita em Ruby on Rails.
+Uma plataforma para o gerenciamento de estudos e revisões feita com Ruby on Rails.
 
 # Ruby on Rails
 
@@ -12,7 +12,7 @@ Uma plataforma para o gerenciamento de estudos e revisões feita em Ruby on Rail
 - Enqueue jobs for assincronous work.
 - Store uploads in the cloud.
 - Provide solid security protections for common attacks.
-- Rails is opinionated software.
+- Rails is a opinionated software.
 - Don't Repeat Yourself.
 - Convention Over Configuration.
 - ruby --version
@@ -48,4 +48,8 @@ get "/articles", to "articles#index"
 
 - bin/rails generate controller Articles index --skip-routes
 - When an action does not explicitly render a view (or otherwise trigger an HTTP response), Rails will automatically render a view that matches the name of the controller and action.
-- https://guides.rubyonrails.org/getting_started.html#autoloading
+- Rails applications do not use require to load application code.
+- Application classes and modules are available everywhere, you do not need and should not load anything under `app` with `require`. This feature is called autoloading.
+- You only need require calls for two use cases:
+  - To load files under the `lib directory.
+  - To load gem dependencies that have `require: false` in the `Gemfile`.
