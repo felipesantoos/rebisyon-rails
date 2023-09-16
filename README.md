@@ -53,3 +53,13 @@ get "/articles", to "articles#index"
 - You only need require calls for two use cases:
   - To load files under the `lib directory.
   - To load gem dependencies that have `require: false` in the `Gemfile`.
+- Rails uses the MVC (Model-View-Controller) design pattern by convention.
+- A model is a Ruby class that is used to represent data.
+- Models can interact with the application's database through a feature of Rails called Active Record.
+- bin/rails generate model Article title:string body:text
+- Model names are singular, because an instantiated model represents a single data record.
+- Migrations are used to alter the structure of an application's database.
+- In Rails applications, migrations are written in Ruby so that they can be database-agnostic.
+- By default, the create_table method adds an id column as an auto-incrementing primary key.
+- The method t.timestamps defines two additional columns named created_at and updated_at. As we will see, Rails will manage these for us, setting the values when we create or update a model object.
+- bin/rails db:migrate
