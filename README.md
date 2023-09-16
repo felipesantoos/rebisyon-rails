@@ -63,3 +63,19 @@ get "/articles", to "articles#index"
 - By default, the create_table method adds an id column as an auto-incrementing primary key.
 - The method t.timestamps defines two additional columns named created_at and updated_at. As we will see, Rails will manage these for us, setting the values when we create or update a model object.
 - bin/rails db:migrate
+- The console is an interactive coding environment just like irb, but it also automatically loads Rails and our application code.
+- bin/rails console
+- Controller instance variables can be accessed by the view. That means we can reference @articles in app/views/articles/index.html.erb.
+- ERB is a templating system that evaluates Ruby code embedded in a document.
+- The `<% %>` tag means "evaluate the enclosed Ruby code."
+- The `<%= %>` tag means "evaluate the enclosed Ruby code, and output the value it returns."
+- Anything you could write in a regular Ruby program can go inside these ERB tags, though it's usually best to keep the contents of ERB tags short, for readability.
+- Rails flow:
+  - The browser makes a request: GET http://localhost:3000.
+  - Our Rails application receives this request.
+  - The Rails router maps the root route to the index action of ArticlesController.
+  - The index action uses the Article model to fetch all articles in the database.
+  - Rails automatically renders the app/views/articles/index.html.erb view.
+  - The ERB code in the view is evaluated to output HTML.
+  - The server sends a response containing the HTML back to the browser.
+- https://guides.rubyonrails.org/getting_started.html#crudit-where-crudit-is-due
