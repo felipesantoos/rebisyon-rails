@@ -41,11 +41,7 @@ Uma plataforma para o gerenciamento de estudos e revisões feita com Ruby on Rai
 - .ruby-version	- This file contains the default Ruby version.
 - bin/rails server
 - In the development environment, Rails does not generally require you to restart the server; changes you make in files will be automatically picked up by the server.
-
-```ruby
-get "/articles", to "articles#index"
-```
-
+- get "/articles", to "articles#index"
 - bin/rails generate controller Articles index --skip-routes
 - When an action does not explicitly render a view (or otherwise trigger an HTTP response), Rails will automatically render a view that matches the name of the controller and action.
 - Rails applications do not use require to load application code.
@@ -78,4 +74,31 @@ get "/articles", to "articles#index"
   - Rails automatically renders the app/views/articles/index.html.erb view.
   - The ERB code in the view is evaluated to output HTML.
   - The server sends a response containing the HTML back to the browser.
-- https://guides.rubyonrails.org/getting_started.html#crudit-where-crudit-is-due
+- A route parameter captures a segment of the request's path, and puts that value into the params Hash, which is accessible by the controller action (`/articles/:id` -> `/articles/1` -> `params[:id]` -> `1`).
+- Whenever we have such a combination of routes, controller actions, and views that work together to perform CRUD operations on an entity, we call that entity a resource.
+- get "/articles/:id", to: "articles#show"
+- resources :articles
+- bin/rails routes
+
+```shell
+$ bin/rails routes
+      Prefix Verb   URI Pattern                  Controller#Action
+        root GET    /                            articles#index
+    articles GET    /articles(.:format)          articles#index
+ new_article GET    /articles/new(.:format)      articles#new
+     article GET    /articles/:id(.:format)      articles#show
+             POST   /articles(.:format)          articles#create
+edit_article GET    /articles/:id/edit(.:format) articles#edit
+             PATCH  /articles/:id(.:format)      articles#update
+             DELETE /articles/:id(.:format)      articles#destroy
+```
+
+- The resources method also sets up URL and path helper methods that we can use to keep our code from depending on a specific route configuration.
+- The values in the "Prefix" column above plus a suffix of _url or _path form the names of these helpers.
+- The article_path helper returns "/articles/#{article.id}" when given an article.
+- `<a href="<%= article_path(article) %>">`
+- <%= link_to article.title, article %>
+- @arcitles and @article are instance variables.
+- The new action instantiates a new article, but does not save it. This article will be used in the view when building the form. By default, the new action will render app/views/articles/new.html.erb.
+- The create action instantiates a new article with values for the title and body, and attempts to save it. If the article is saved successfully, the action redirects the browser to the article's page at "http://localhost:3000/articles/#{@article.id}". Else, the action redisplays the form by rendering app/views/articles/new.html.erb with status code 422 Unprocessable Entity.
+- redirect_to will cause the browser to make a new request, whereas render renders the specified view for the current request. It is important to use redirect_to after mutating the database or application state. Otherwise, if the user refreshes the page, the browser will make the same request, and the mutation will be repeated.
